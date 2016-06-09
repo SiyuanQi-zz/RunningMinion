@@ -1,0 +1,42 @@
+# LaTex Files
+# Latex files
+
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.tui
+*.top
+*.tmp
+*.mp
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.pdf
+
+# Workspace files
+*.pyc
+*.swp
+*.egg-info
+*.log
+.DS_Store
+.idea
+PLE/docs/_build
+PLE/docs/_templates
+PLE/examples/*.png

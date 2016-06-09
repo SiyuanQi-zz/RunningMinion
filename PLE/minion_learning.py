@@ -93,7 +93,7 @@ def play_with_saved_agent(agent_file_path, agent_file_name, test_rounds=20):
         episode_reward = 0.0
         while env.game_over() == False:
             state = env.getGameState()
-            reward, action = my_agent.act(state, epsilon=0.05)
+            reward, action = my_agent.act(state, epsilon=0.00)
             episode_reward += reward
 
         print "Agent score {:0.1f} reward for episode.".format(episode_reward)
