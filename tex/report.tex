@@ -123,6 +123,12 @@ $L_i(\theta_i)$.
 
 
 \subsection{Deep Q-Learning Network}
+We apply the deep Q-learning network to train our agent \cite{mnih2013playing}. Recent breakthroughs in computer vision and speech recognition have relied on efficiently training deep neural networks on very large training sets. The most successful approaches are trained directly from the raw inputs, using lightweight updates based on stochastic gradient descent. In this project, we use a reinforcement learning algorithm that takes the internal state as input.
+
+The original architecture of connecting a neural network to reinforcement learning updates the parameters of a network that estimates the value function, directly from on-policy samples of experience, $s_t, a_t, r_t, s_{t+1}, a_{t+1}$, drawn from the algorithm’s interactions with the environment (or by self-play, in the case of backgammon). Recently, a new architecture exploiting the deep neural network and scalable RL algorithms was proposed. In this approach, a technique known as experience-replay is utilized. The agent's experiences $e_t={s_t, a_t, r_t, s_{t+1}}$ at each time step is stored in a dataset $D={e_1, \cdots, e_N}$. The experiences are pooled over many episodes into a replay memory. In the inner loop of the algorithm, the Q-learning updates are applied to samples of experience, $e \sim D$, drawn from the pool of stored samples (replay memory). After performing experience replay,
+the agent selects and executes an action according to an $\epsilon$-greedy policy. Since using histories of arbitrary length as inputs to a neural network can be difficult, the Q-function instead works on fixed length representation of histories produced by a function $phi$. 
+
+In practice, this algorithm only stores the last N experience tuples in the replay memory, and samples uniformly at random from D when performing updates. This approach is in some respects limited since the memory buffer does not differentiate important transitions and always overwrites with recent transitions due to the finite memory size N. Similarly, the uniform sampling gives equal importance to all transitions in the replay memory. 
 
 
 %% ------------------------------------- EXPERIMENTS ------------------------------------- %%
@@ -186,7 +192,7 @@ In reinforcement learning, the evaluation of an agent is difficult to compute du
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=3.0in]{../figures/testing.png}
+  \includegraphics[width=3.0in]{../fig/reward_in_testing_5000.png}
   \caption{Testing result.''}
   \label{fig:result}
 \end{figure}
@@ -204,5 +210,5 @@ To Robert, for all the bagels.
 
 \bibliographystyle{acmsiggraph}
 \nocite{*}
-\bibliography{template}
+\bibliography{report}
 \end{document}
