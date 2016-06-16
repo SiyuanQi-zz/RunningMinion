@@ -93,7 +93,9 @@ In the following sections of this report, we will first briefly describe the lea
 
 %% ------------------------------------- RELATED WORK ------------------------------------- %%
 \section{Related Work}
+Reinforcement learning has been successfully applied to real-life environment for robotics controlling \cite{kober2013survey,abbeel2007helicopter}. To better cope with real-life situations, deep learning is a heated choice \cite{chen2014door}. Similarly, the researchers applied the algorithm to virtual environment and help the agents to finish tasks such as walking in the maze or chasing the pray \cite{manteghi2015maze,olsen2015co}. However, in those research in virtual setting, only linear function is used in reinforcement learning due to the chance of causing not convergence of the system. 
 
+Previously, some researchers manage to combine deep learning and reinforcement learning \cite{mnih2013playing,gu02015monte}. [] develops an agent with Deep Q-learning (DQN) and make it learn to play video games in Atari 2600 emulator. They apply convolution neural network to store all Q values and the input to the network is only raw pixel of the game image. The experiment result is excellent and even outperform human-level control. The paper also applies experience-replace to break the dependency of sequential frame of the game procedure. The research is a good start to extent to more games. In this paper, DQN is adopted with Pygame environment \cite{tasfi2016PLE} in our experiment to make the agent learn to survive in new game environment.
 
 %% ------------------------------------- MODEL ------------------------------------- %%
 %\section{Model}
@@ -140,7 +142,7 @@ In practice, this algorithm only stores the last N experience tuples in the repl
 %% ------------------------------------- EXPERIMENTS ------------------------------------- %%
 \section{Experiments}
 \subsection{Game Environment} 
-This project(game) is implemented by Pygame, a cross-platfom set of Python modules designed for creating games. By using Pygame, we can easily build up a game scenery for our intelligent agent to play with. Furthermore, Python has many open-source machine learning packages. Therefore we can simply focus on training our agent to run and jump through all the obstacles instead of spending much time on writing common learning algorithm from scratch. These set of modules allow us to write fully featured games and multimedia programs with small amount of code. It is very easy to use and truly portable. PyGame Learning Environment (PLE) \cite{tasfi2016PLE} is the learning environment we used in this work. PLE mimicks the Arcade Learning Environment \cite{bellemare13arcade} interface, allowing a quick start to reinforcement learning in python. The goal of PLE is allow practitioners to focus design of models and experiments instead of environment design. Through PLE, we can implement the whole learning agent without major modification of the game.
+This project(game) is implemented by Pygame, a cross-platfom set of Python modules designed for creating games. By using Pygame, we can easily build up a game scenery for our intelligent agent to play with. Furthermore, Python has many open-source machine learning packages. Therefore we can simply focus on training our agent to run and jump through all the obstacles instead of spending much time on writing common learning algorithm from scratch. These set of modules allow us to write fully featured games and multimedia programs with small amount of code. It is very easy to use and truly portable. PyGame Learning Environment (PLE) is the learning environment we used in this work. PLE mimicks the Arcade Learning Environment \cite{bellemare13arcade} interface, allowing a quick start to reinforcement learning in python. The goal of PLE is allow practitioners to focus design of models and experiments instead of environment design. Through PLE, we can implement the whole learning agent without major modification of the game.
 
 \subsubsection{Graphics(User interface)}
 The Minion has three image status when running. We set these three status chaning repeatedly with certain pattern. When jumping, the Minion has another image status. The obstacle we used here is a pipe shown in figure \ref{fig:minion}.
@@ -170,21 +172,20 @@ The Minion has three image status when running. We set these three status chanin
 \end{figure}
 
 \subsubsection{Game setting}
-\begin{itemize}
-  \item Input parameters: For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
-  \item Input parameters: For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
-  \item Rewards: In our game setting, if the Minion passes through one obstacle, it will gain 1 reward but will lose 5 rewards if hit on the pipe. Besides, in order to combine the appropriate rate of jumping, we set a penalty to the score whenever the Minion jump, which means the agent will lose 0.2 every time it jumps. After one game, the more rewards the agent gained, the better model we have learned.
-\end{itemize}
+(1) Input parameters
+For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
+(2) Actions
+For every step, the agent can choose to take an action and jump or do nothing.
+(3) Rewards
+In our game setting, if the Minion passes through one obstacle, it will gain 1 reward but will lose 5 rewards if hit on the pipe. Besides, in order to combine the appropriate rate of jumping, we set a penalty to the score whenever the Minion jump, which means the agent will lose 0.2 every time it jumps. 
 
+After one game, the more rewards the agent gained, the better model we have learned.
 
 \subsubsection{Game Learning Procedure}
 
-\begin{enumerate}
-\setlength\itemindent{20pt}
- \item[Step 1] Observe what state the Minion is in and perform the action (jump or not jump) that maximizes expected reward. Let the game engine perform its “tick”. Now the Minion is in a next state s’.
-\item[Step 2] Observe the new state s’, and the reward associated with it.
-\item[Step 3] Update the Q array according to the Q-Learning rule and pass the array to the learning procedure.
-\end{enumerate}
+Step 1: Observe what state the Minion is in and perform the action (jump or not jump) that maximizes expected reward. Let the game engine perform its “tick”. Now the Minion is in a next state s’.
+Step 2: Observe the new state s’, and the reward associated with it.
+Step 3: Update the Q array according to the Q-Learning rule and pass the array to the learning procedure.
 
 
 \subsubsection{Experiment results}
