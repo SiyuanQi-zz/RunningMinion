@@ -170,20 +170,21 @@ The Minion has three image status when running. We set these three status chanin
 \end{figure}
 
 \subsubsection{Game setting}
-(1) Input parameters
-For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
-(2) Actions
-For every step, the agent can choose to take an action and jump or do nothing.
-(3) Rewards
-In our game setting, if the Minion passes through one obstacle, it will gain 1 reward but will lose 5 rewards if hit on the pipe. Besides, in order to combine the appropriate rate of jumping, we set a penalty to the score whenever the Minion jump, which means the agent will lose 0.2 every time it jumps. 
+\begin{itemize}
+  \item Input parameters: For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
+  \item Input parameters: For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
+  \item Rewards: In our game setting, if the Minion passes through one obstacle, it will gain 1 reward but will lose 5 rewards if hit on the pipe. Besides, in order to combine the appropriate rate of jumping, we set a penalty to the score whenever the Minion jump, which means the agent will lose 0.2 every time it jumps. After one game, the more rewards the agent gained, the better model we have learned.
+\end{itemize}
 
-After one game, the more rewards the agent gained, the better model we have learned.
 
 \subsubsection{Game Learning Procedure}
 
-Step 1: Observe what state the Minion is in and perform the action (jump or not jump) that maximizes expected reward. Let the game engine perform its “tick”. Now the Minion is in a next state s’.
-Step 2: Observe the new state s’, and the reward associated with it.
-Step 3: Update the Q array according to the Q-Learning rule and pass the array to the learning procedure.
+\begin{enumerate}
+\setlength\itemindent{20pt}
+ \item[Step 1] Observe what state the Minion is in and perform the action (jump or not jump) that maximizes expected reward. Let the game engine perform its “tick”. Now the Minion is in a next state s’.
+\item[Step 2] Observe the new state s’, and the reward associated with it.
+\item[Step 3] Update the Q array according to the Q-Learning rule and pass the array to the learning procedure.
+\end{enumerate}
 
 
 \subsubsection{Experiment results}
