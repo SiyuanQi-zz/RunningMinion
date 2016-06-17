@@ -140,7 +140,7 @@ In practice, this algorithm only stores the last N experience tuples in the repl
 
 
 %% ------------------------------------- EXPERIMENTS ------------------------------------- %%
-\section{Experiments}
+\section{Game Design}
 \subsection{Game Environment} 
 This project(game) is implemented by Pygame, a cross-platfom set of Python modules designed for creating games. By using Pygame, we can easily build up a game scenery for our intelligent agent to play with. Furthermore, Python has many open-source machine learning packages. Therefore we can simply focus on training our agent to run and jump through all the obstacles instead of spending much time on writing common learning algorithm from scratch. These set of modules allow us to write fully featured games and multimedia programs with small amount of code. It is very easy to use and truly portable. PyGame Learning Environment (PLE) is the learning environment we used in this work. PLE mimicks the Arcade Learning Environment \cite{bellemare13arcade} interface, allowing a quick start to reinforcement learning in python. The goal of PLE is allow practitioners to focus design of models and experiments instead of environment design. Through PLE, we can implement the whole learning agent without major modification of the game.
 
@@ -171,7 +171,7 @@ The Minion has three image status when running. We set these three status chanin
   \label{fig:interface}
 \end{figure}
 
-\subsubsection{Game setting}
+\subsection{Game setting}
 (1) Input parameters
 For every step in the game process, we keep track of three game states: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
 (2) Actions
@@ -188,14 +188,16 @@ Step 2: Observe the new state s’, and the reward associated with it.
 Step 3: Update the Q array according to the Q-Learning rule and pass the array to the learning procedure.
 
 
-\subsubsection{Experiment results}
+\section{Experiment}
+In the experiments, we successfully trained an agent that is able to play the game without failing. In this section, we analyze the strategies for training.
+
 (1) \textbf{Stability}
 
 In reinforcement learning, the evaluation of an agent is difficult to compute during training. Instead, we compute the total reward the agent collects in one episode. From the figure, we can find that the average total reward is very noisy. This is because a small change to the weight of stragety will largely change the state of policy and thus greatly affect the reward of that policy. 
 
 (2) \textbf{Different reward strategies for agent learning}
 
-In the experimental part, we have tried Tried different combinations of rewards setting. The basic idea of the rewards of the game is that the Minion will gain rewards after jumping over each obstacle and will lose rewards whenver he jumps or hitted. It is obivous that the objective score should be deducted when the Minion died so the trained model would try to avoid hitting the obstacle. So our initial setting was gaining rewards after over obstacles and losing rewards when dead. However, in the training process, we found that this setting would cause the Minion to jump constantly and barely walk. So in order to let the Minion play more like the way human does, we set the rewards be deduceted whenever the Minion jumps. We call this “consumes physical strength”. After adding this, the trained Minion combines walking and jumping reasonably. Finally, we chose the reawards setting as gaining 1 reward after jumping over each obstacle, and losing 0.2 and 5 points respectively when hitted and jumping. 
+In the experimental part, we have tried different combinations of rewards setting. The basic idea of the rewards of the game is that the Minion will gain rewards after jumping over each obstacle and will lose rewards whenver he jumps or hitted. It is obivous that the objective score should be deducted when the Minion died so the trained model would try to avoid hitting the obstacle. So our initial setting was gaining rewards after over obstacles and losing rewards when dead. However, in the training process, we found that this setting would cause the Minion to jump constantly and barely walk. So in order to let the Minion play more like the way human does, we set the rewards be deduceted whenever the Minion jumps. We call this “consumes physical strength”. After adding this, the trained Minion combines walking and jumping reasonably. Finally, we chose the reawards setting as gaining 1 reward after jumping over each obstacle, and losing 0.2 and 5 points respectively when hitted and jumping. 
 
 (3) \textbf{Different states chosen for agent learning}
 
@@ -223,7 +225,7 @@ For future work, we would like to modifify the game and create a much more reali
 
 
 \section*{Acknowledgements}
-We want to give special thanks to Professor Terzopoulos for giving the great course about artificial life and overview of related techniques. We shose the project topic based on our interest and enjoyed the process.
+We want to give special thanks to professor Terzopoulos for giving the great course about artificial life and overview of related techniques. We chose the project topic based on our interest and enjoyed the process.
 
 \bibliographystyle{acmsiggraph}
 \nocite{*}
