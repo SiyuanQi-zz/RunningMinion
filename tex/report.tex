@@ -191,20 +191,16 @@ Step 3: Update the Q array according to the Q-Learning rule and pass the array t
 \section{Experiment}
 In the experiments, we successfully trained an agent that is able to play the game without failing. In this section, we analyze the strategies for training.
 
-(1) \textbf{Stability}
-
+\subsection{Stability}
 In reinforcement learning, the evaluation of an agent is difficult to compute during training. Instead, we compute the total reward the agent collects in one episode. From the figure, we can find that the average total reward is very noisy. This is because a small change to the weight of stragety will largely change the state of policy and thus greatly affect the reward of that policy. 
 
-(2) \textbf{Different reward strategies for agent learning}
-
+\subsection{Different reward strategies for agent learning}
 In the experimental part, we have tried different combinations of rewards setting. The basic idea of the rewards of the game is that the Minion will gain rewards after jumping over each obstacle and will lose rewards whenver he jumps or hitted. It is obivous that the objective score should be deducted when the Minion died so the trained model would try to avoid hitting the obstacle. So our initial setting was gaining rewards after over obstacles and losing rewards when dead. However, in the training process, we found that this setting would cause the Minion to jump constantly and barely walk. So in order to let the Minion play more like the way human does, we set the rewards be deduceted whenever the Minion jumps. We call this “consumes physical strength”. After adding this, the trained Minion combines walking and jumping reasonably. Finally, we chose the reawards setting as gaining 1 reward after jumping over each obstacle, and losing 0.2 and 5 points respectively when hitted and jumping. 
 
-(3) \textbf{Different states chosen for agent learning}
-
+\subsection{Different states chosen for agent learning}
 For every step in the game process, we need to keep track of the game states as the input parameters of the training agent model. Intuitively, we could see that some state parameters such as the distance between the next obstacle and agent, height of the next obstacle and life status of the agent, the distance between the one after the next obstacle and agent, height of the one after the next obstacle and life status of the agent will matter. After trying and comparing different states, we decided to use the state parameters that achieve the best experimental results. The state contains three parameters: Horizontal distance between obstacle and agent, Height of obstacle and life status of the agent.
 
-(4) \textbf{Different input parameters for the training of deep Q-learning network}
-
+\subsection{Different input parameters for the training of deep Q-learning network}
 In the experiments, we found that the parameters for the training of deep Q-learning network need to be tuned to produce satisfying results. Since the agent is choosing an operation each frame, it is very likely that it jumps every several frames and cannot explore the effect of taking no operation for a long period of time. Hence it is important to appropriately set the $\epsilon$, which percentage of time we perform a random action that helps exploration. In the experiments, we initialize $\epsilon$ to 0.15 and decay to 0.1 in 1000 steps.
 
 The minimum memory size before the training start needs to be small enough for the algorithm to be efficient. Otherwise the agent will not succeed to pass a single obstacle before the training starts. Since the correlation between different frames is strong, we set the number of frames in a state to be 1 and set the number of skipped frames to be 2. The training batch size is set to be 20, which is smaller than the minimum memory size required for the replay memory of the training algorithm.
